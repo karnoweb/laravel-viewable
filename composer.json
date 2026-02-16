@@ -1,0 +1,44 @@
+{
+    "name": "karnoweb/laravel-viewable",
+    "description": "A powerful view tracking and analytics package for Laravel with Jalali/Gregorian calendar support",
+    "keywords": ["laravel", "views", "analytics", "tracking", "jalali", "persian"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "KarnoWeb",
+            "email": "info@karnoweb.ir"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/database": "^10.0|^11.0|^12.0",
+        "morilog/jalali": "^3.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0",
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "KarnoWeb\\Viewable\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "KarnoWeb\\Viewable\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "KarnoWeb\\Viewable\\ViewableServiceProvider"
+            ],
+            "aliases": {
+                "Viewable": "KarnoWeb\\Viewable\\Facades\\Viewable"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

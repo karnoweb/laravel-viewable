@@ -1,0 +1,42 @@
+# Composer
+/vendor/
+/composer.lock
+
+# PHP
+*.log
+*.cache
+*.tmp
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests
+/tests/.phpunit.result.cache
+.phpunit.result.cache
+
+# Laravel specific
+/storage/
+/bootstrap/cache/
+
+# Node.js (if any)
+node_modules/
+npm-debug.log*
+
+# Coverage reports
+/coverage/
+/coverage.xml
+
+# Build artifacts
+/build/
+/dist/
+
+# Temporary files
+*.bak
+*.backup
