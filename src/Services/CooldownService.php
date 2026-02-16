@@ -7,6 +7,7 @@ namespace KarnoWeb\Viewable\Services;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
+// This service manages cooldown periods to prevent multiple views from the same visitor being recorded within a certain timeframe. It uses caching or session storage to track when a view was last recorded for a given visitor and model.
 class CooldownService
 {
     /**
