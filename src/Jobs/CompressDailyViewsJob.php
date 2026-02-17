@@ -55,18 +55,24 @@ class CompressDailyViewsJob implements ShouldQueue
             $groupByColumns[] = $branchColumn;
         }
 
-        // Query to get aggregated data
-        $query = ViewableRecord::query()
+        // Query to get aggregated data using a subquery to avoid ONLY_FULL_GROUP_BY issues
+        $subQuery = ViewableRecord::query()
             ->select($groupByColumns)
             ->selectRaw('COUNT(*) as total_views')
             ->selectRaw('COUNT(DISTINCT visitor_key) as unique_views')
             ->whereBetween('viewed_at', [$startOfDay, $endOfDay]);
 
         if ($branchEnabled && $this->branchId !== null) {
-            $query->where($branchColumn, $this->branchId);
+            $subQuery->where($branchColumn, $this->branchId);
         }
 
-        $query->groupBy($groupByColumns);
+        $subQuery->groupBy($groupByColumns);
+
+        // Use the subquery to fetch grouped results
+        $query = DB::table(DB::raw("({$subQuery->toSql()}) as grouped_records"))
+            ->mergeBindings($subQuery->getQuery()) // Merge bindings from the subquery
+            ->select('*')
+            ->orderBy('grouped_records.viewable_type'); // Add orderBy clause
 
         // Process in chunks
         $processedCount = 0;
