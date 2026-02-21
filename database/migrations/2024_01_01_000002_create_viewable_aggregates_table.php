@@ -40,8 +40,8 @@ return new class extends Migration
             $table->string('period_key', 20)->index();
 
             // Period boundaries
-            $table->timestamp('period_start')->useCurrent();
-            $table->timestamp('period_end')->useCurrent();
+            $table->dateTime('period_start');
+            $table->dateTime('period_end');
 
             // Aggregated counts
             $table->unsignedInteger('total_views')->default(0);
